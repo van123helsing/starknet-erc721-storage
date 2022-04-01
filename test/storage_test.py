@@ -50,6 +50,7 @@ async def test_set_property_array():
     await contract.setPropertyArray(name=str_to_felt('opis'), tokenId=uint256(1), value=str_to_felt_array('1 Janez je šel po Ježa in nato se je vrnil v svojo Jazbino kjer je zaspal trdno kot Trnjuljčica.')).invoke(caller_address=STARK_KEY)
 
     exec_info = await contract.getPropertyArray(name=str_to_felt('ime'), tokenId=uint256(1)).call()
+    print(exec_info.result)
     res = reduce(lambda x, y: x + felt_to_str(y), exec_info.result[0], '')
 
     assert res == '1 Janez je šel po Ježa in nato se je vrnil v svojo Jazbino kjer je zaspal trdno kot Trnjuljčica.'
